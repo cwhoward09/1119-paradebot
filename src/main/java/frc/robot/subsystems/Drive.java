@@ -16,18 +16,18 @@ public class Drive extends SubsystemBase {
 
     private final DifferentialDrive robotDrive;
 
-
     public Drive() {
-        this.leftLeader = new WPI_TalonSRX(3);
-        this.leftFollower = new WPI_VictorSPX(2);
+        this.leftLeader = new WPI_TalonSRX(4);
+        this.leftFollower = new WPI_VictorSPX(5);
 
-        this.rightLeader = new WPI_TalonSRX(1);
-        this.rightFollower = new WPI_VictorSPX(0);
+        this.rightLeader = new WPI_TalonSRX(2);
+        this.rightFollower = new WPI_VictorSPX(3);
 
         this.leftFollower.follow(this.leftLeader);
         this.rightFollower.follow(this.rightLeader);
 
         this.rightLeader.setInverted(true);
+        this.rightFollower.setInverted(true);
 
         this.robotDrive = new DifferentialDrive(this.leftLeader, this.rightLeader);
     }
