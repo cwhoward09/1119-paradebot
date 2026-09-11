@@ -34,6 +34,11 @@ public class Launcher extends SubsystemBase {
         rightLauncherMotor.setVoltage(-12);
     }
 
+    public void launchSlow() {
+        leftLauncherMotor.setVoltage(-6);
+        rightLauncherMotor.setVoltage(-6);
+    }
+
     public void launcherStop() {
         leftLauncherMotor.setVoltage(0);
         rightLauncherMotor.setVoltage(0);

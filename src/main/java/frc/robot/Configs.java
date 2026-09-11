@@ -3,12 +3,22 @@ package frc.robot;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import frc.robot.subsystems.Pivot.pivotSetpoints;
 
+
 public final class Configs {
+
+    public final class Drive {
+        public static final SparkMaxConfig driveConfig = new SparkMaxConfig();
+    
+        static {
+            driveConfig.idleMode(IdleMode.kBrake)
+            .smartCurrentLimit(20);
+        }
+    }
     public final class Intake {
         public static final SparkMaxConfig intakeConfig = new SparkMaxConfig();
 

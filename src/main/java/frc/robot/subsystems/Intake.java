@@ -6,7 +6,11 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
 
@@ -26,6 +30,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void intake() {
+    
     intakeMotor.setVoltage(-5);
   }
 
@@ -38,11 +43,19 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean hasNote() {
-    return limit.get();
+    return !limit.get();
   }
 
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Has Note", hasNote());
+  }
+
+  public Command collectNote(Joystick controller) {
+    return this.run(() -> intake())
+    .until(() -> hasNote())
+    .andThen(Commands.runOnce(() -> intakeStop()))
+    .andThen(() -> controller.setRumble(RumbleType.kBothRumble, 1)).withTimeout(1)
+    .andThen(Commands.runOnce(() -> controller.setRumble(RumbleType.kBothRumble, 0)));
   }
 }

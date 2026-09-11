@@ -29,7 +29,10 @@ public class Pivot extends SubsystemBase {
     public enum pivotSetpoints {
         intakePosition,
         idlePosition,
-        launchPosition;
+        launchPositionLow,
+        launchPositionMid,
+        launchPositionHigh,
+        L2;
     }
 
     public Pivot() {
@@ -79,8 +82,20 @@ public class Pivot extends SubsystemBase {
                         pivotTargetPosition = 7;
                         break;
 
-                    case launchPosition:
+                    case launchPositionLow:
+                        pivotTargetPosition = 40;
+                        break;
+
+                    case launchPositionMid:
+                        pivotTargetPosition = 30;
+                        break;
+
+                    case launchPositionHigh:
                         pivotTargetPosition = 25;
+                        break;
+
+                    case L2:
+                        pivotTargetPosition = 50;
                         break;
 
                     default:

@@ -5,23 +5,27 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class Drive extends SubsystemBase {
 
-    private WPI_TalonSRX leftLeader;
-    private WPI_VictorSPX leftFollower;
+    private SparkMax leftLeader;
+    private SparkMax leftFollower;
 
-    private WPI_TalonSRX rightLeader;
-    private WPI_VictorSPX rightFollower;
+    private SparkMax rightLeader;
+    private SparkMax rightFollower;
 
     private final DifferentialDrive robotDrive;
 
     public Drive() {
-        this.leftLeader = new WPI_TalonSRX(4);
-        this.leftFollower = new WPI_VictorSPX(5);
+        this.leftLeader = new SparkMax(0, null);
+        this.leftFollower = new SparkMax(0, null);
 
-        this.rightLeader = new WPI_TalonSRX(2);
-        this.rightFollower = new WPI_VictorSPX(3);
+        this.rightLeader = new SparkMax(0, null);
+        this.rightFollower = new SparkMax(0, null);
 
         this.leftFollower.follow(this.leftLeader);
         this.rightFollower.follow(this.rightLeader);
